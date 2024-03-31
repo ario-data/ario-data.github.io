@@ -1,1 +1,267 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<style>
+        pre {
+            white-space: pre-wrap; /* 保留换行 */
+            font-family: monospace; /* 设置字体 */
+            background-color: #f4f4f4; /* 背景色 */
+            padding: 10px; /* 内边距 */
+            border-radius: 5px; /* 圆角 */
+            border: 1px solid #ddd; /* 边框 */
+            max-width: 600px; /* 设置最大宽度 */
+            overflow-y: auto; /* 添加纵向滚动条 */
+            max-height: 500px; /* 设置最大高度 */
+        }
+        #content {
+            display: flex;
+            justify-content: center;
+        }   
+
+    </style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ARIO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="styles.css"> <!-- 根据需要添加自定义样式表 -->
+</head>
+<body>
+
+<section class="hero">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-two-thirds is-centered has-text-centered">
+                    <h1 class="title is-1 publication-title">ARIO</h1>
+                    <h2 class="subtitle is-2 publication-subtitle">All Robots In One</h2>
+                    <div class="is-size-4 publication-authors">
+                        <span class="author-block">
+                          <a href="https://openi.pcl.ac.cn/">鹏城实验室</a>&nbsp;&nbsp;&nbsp;
+                          <a href="https://github.com/agilexrobotics?tab=repositories">松灵机器人</a>&nbsp;&nbsp;&nbsp;
+                          <a href="">中山大学</a>&nbsp;&nbsp;&nbsp;
+                          <a href="">南方科技大学</a>
+                        </span>
+                      </div>
+                      <img src="./File/图片.png" style="width: 80%;">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-two-thirds">
+            <h2 class="title is-2">项目背景</h2>
+            <div class="content has-text-justified">
+              <p>
+                在大模型时代，通过增加数据量、扩大模型规模，可以实现模型性能的持续提升。为构建具身智能基础大模型，搭建具有规模化效应的具身智能应用平台，一个开源的大规模高质量的机器人感知操作数据集迫在眉睫。正如斯坦福大学的ImageNet推动了计算机视觉的研究一样，作为国家战略科技力量的重要组成部分，我们希望依托“中国算力网”和“启智”开源生态，在具身智能领域牵头创建一个具有同样影响力的开源数据集ARIO（All Robots In One）。
+              </p>
+            </div>
+          </div>
+    </div>
+    </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="title is-2" style="text-align: center;">案例</h2>
+    <div class="columns is-centered">
+      <div class="column is-two-fifths is-centered has-text-centered">
+        <video controls="" autoplay="" loop="" muted="" playsinline="" src="./File/twist_button.mp4" poster="./resources/loading-icon.gif" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;"></video>
+      </div>
+      <div class="column is-two-fifths is-centered has-text-centered">
+        <video controls="" autoplay="" loop="" muted="" playsinline="" src="./File/inference.mp4" poster="./resources/loading-icon.gif" style="border: 1px solid #bbb; border-radius: 10px; margin: 1.0%;"></video>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+     <div class="columns is-centered has-text-centered">
+          <div class="column is-two-thirds">
+            <h2 class="title is-2">数据采集方案</h2>
+            <div class="content has-text-justified">
+              <p>
+                数据文件结构整体分为：collection——series——task——episode，collection是指一次提交上传的数据集样本，可能包含不同的场景和机器人类型，series是指同一个场景和同一个机器人采集的系列数据，如双臂机器人在厨房采集的系列数据，可能包含不同的任务，task是一个具体的任务，比如抓取苹果，同一个任务可以重复采集多次，episode是针对某一具体任务的一次完整采集过程。episode下分传感器采集数据，各传感器可根据自己频率自行采集，但要以同一个时间戳为基准。示例文件结构如下：
+              </p>
+            </div>
+          </div>
+    </div>
+    <div id="content" class="content">
+    <pre>
+collection（一次提交的数据集样本）
+
+│ commit.yaml（提交者信息与声明）
+
+│
+
+├─series-1（同一个场景，同一个机器人）
+
+│ │  calibration_1.yaml（相机1标定参数）
+
+│ │  calibration_cam1_lidar1.yaml（相机1与lidar 1的标定参数）
+
+│ │  IMU.pdf（IMU传感器说明书）
+
+│ │  information.yaml（场景描述，机器人信息，各传感器数量和信息）
+
+│ │  touch.pdf（触觉传感器说明书）
+
+│  │     松灵机器人说明书.pdf
+
+│ │
+
+│ ├─task-1（一个任务，如：抓取苹果）
+
+│ │  │  description.yaml（instruction）
+
+│ │  │  task_record.mp4（每个任务的视频记录）
+
+│ │  │
+
+│ │  ├─episode-1（一次完整采集过程）
+
+│ │  │  │  audio-1-1709554382234.aac（音频数据）
+
+│ │  │  │  base.txt（机器人本体运动数据）
+
+│ │  │  │  IMU-1.txt（IMU传感器数据）
+
+│ │  │  │  left_master_arm_joint-0.txt（master左臂关节0数据）
+
+│ │  │  │  left_master_gripper.txt（master左夹持器运动数据）
+
+│ │  │  │  left_slave_arm_joint-0.txt（slave左臂关节0数据）
+
+│ │  │  │  left_slave_gripper.txt（slave左夹持器运动数据）
+
+│ │  │  │  pan_tilt.txt（头部云台数据）
+
+│ │  │  │  right_master_arm_joint-5.txt（master右臂关节5数据）
+
+│ │  │  │  right_master_gripper.txt（master右夹持器运动数据）
+
+│ │  │  │  right_slave_arm_joint-5.txt（slave右臂关节5数据）
+
+│ │  │  │  right_slave_gripper.txt（slave右臂的夹持器运动数据）
+
+│ │  │  │
+
+│ │  │  ├─cam-1（camera 1采的图像，相机采样帧率应＞=30FPS）
+
+│ │  │  │    1709554382234.png
+
+│ │  │  │    1709554383638.png
+
+│ │  │  │
+
+│ │  │  ├─cam-2
+
+│ │  │  │    1709554382234.png
+
+│ │  │  │    1709554383638.png
+
+│ │  │  │
+
+│ │  │  ├─lidar-1（激光雷达1采的点云，xyz单位：m）
+
+│ │  │  │    1709554382234.ply
+
+│ │  │  │    1709554382334.ply
+
+│ │  │  │
+
+│ │  │  ├─lidar-2
+
+│ │  │  │    1709554382235.ply
+
+│ │  │  │    1709554382354.ply
+
+│ │  │  │
+
+│ │  │  ├─rgbd-1（rgbd 1采的点云）
+
+│ │  │  │    1709554382234.ply
+
+│ │  │  │    1709554383630.ply
+
+│ │  │  │
+
+│ │  │  └─touch-1（触觉传感器1的数据）
+
+│ │  │      1709554382234.txt
+
+│ │  │
+
+│ │  └─episode-2
+
+│ └─task-2
+
+│   │  description.yaml
+
+│   │  task_record.mp4
+
+│   │
+
+│   └─episode-1
+
+│
+
+└─series-2
+
+│  information.yaml
+
+│    松灵机器人2说明书.pdf
+
+  │
+
+  └─task-1
+
+​    │  description.yaml
+
+​    │  task_record.mp4
+
+​    │
+
+​    └─episode-1
+        </pre>
+    </div>
+    <a href="./File/倡议书.pdf" download="example">点击下载完整倡议书</a>
+  </div>
+</section>
+
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>
+            <strong>Mobile ALOHA</strong> by Zipeng Fu*, Tony Z. Zhao*, and Chelsea Finn at Stanford.
+        </p>
+    </div>
+</footer>
+
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+  // 使用 fetch 函数加载 Markdown 文件，并将其转换为 HTML
+  fetch('./File/data_structure.md')
+    .then(response => response.text())
+    .then(text => {
+      // 将 Markdown 文本转换为 HTML
+      const html = marked(text);
+      // 将生成的 HTML 插入到 id 为 content 的元素中
+      document.getElementById('content').innerHTML = html;
+    });
+</script> -->
+
+
+
+</body>
+</html>
+
+
+</body>
+</html>
